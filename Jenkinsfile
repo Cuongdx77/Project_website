@@ -16,3 +16,4 @@ node{
     sh 'docker push dxcuong206/test:04'
   }
   stage('Deploy to K8S')
+}
