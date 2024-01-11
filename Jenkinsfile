@@ -15,6 +15,10 @@ node {
   }
   
   stage('Deploy to K8S') {
-    sh """kubectl apply -f deployment.yaml"""
+    steps {
+        script {
+          kubernetesDeploy(configs: "deployment.yaml")
+        }
+      }
   }
 }
