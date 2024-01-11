@@ -15,6 +15,6 @@ node {
   }
   
   stage('Deploy to K8S') {
-    sh """kubectl app -f deployment.yaml"""
+    sh """kubectl apply -f deployment.yaml"""
   }
 }
