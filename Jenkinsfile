@@ -15,7 +15,7 @@ node {
   }
   
   stage('Deploy to K8S') {
-    withKubeConfig([credentialsId: 'mykubeconfig', serverUrl: 'https://10.26.2.123:6443']) {    
+    kubeconfig(credentialsId: 'mykubeconfig', serverUrl: 'https://10.26.2.123:6443')  {    
     sh 'kubectl apply -f deployment.yaml'
     }
   }
