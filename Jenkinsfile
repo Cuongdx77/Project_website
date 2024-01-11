@@ -1,24 +1,40 @@
-node {
-  stage('Git Hub Checkout') {
-    git branch: 'main', credentialsId: 'GitHubCredential', url: 'https://github.com/Cuongdx77/Project_website.git'
+pipeline {
+  environment {
+    dockerimagename = "dxcuong206/test"
+    dockerImage = ""
   }
-  
-  stage('Build Docker Image') {
-    sh 'docker build -t dxcuong206/test:04 .'
-  }
-  
-  stage('Push Docker Image Into Docker Hub') {
-    withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_PassWord')]) {
-      sh "docker login -u dxcuong206 -p ${Docker_Password}"
+  agent any
+  stages {
+    stage('Checkout Source') {
+      steps {
+        git branch: 'main', credentialsId: 'GitHubCredential', url: 'https://github.com/Cuongdx77/Project_website.git'
+      }
     }
-    sh 'docker push dxcuong206/test:04'
-  }
-  
-  stage('Deploy to K8S') {
-    steps {
+    stage('Build image') {
+      steps{
         script {
-          kubernetesDeploy(configs: "deployment.yaml")
+          dockerImage = docker.build dockerimagename
         }
       }
+    }
+    stage('Pushing Image') {
+      environment {
+          registryCredential = 'DockerHubCred'
+           }
+      steps{
+        script {
+          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+            dockerImage.push("latest")
+          }
+        }
+      }
+    }
+    stage('Deploying React.js container to Kubernetes') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "deployment.yaml"")
+        }
+      }
+    }
   }
 }
