@@ -1,6 +1,6 @@
 node {
   stage('Git Hub Checkout') {
-    git credentialsId: 'GitHubCredential', url: 'https://github.com/Cuongdx77/Project_website.git'
+    git branch: 'main', credentialsId: 'GitHubCredential', url: 'https://github.com/Cuongdx77/Project_website.git'
   }
   
   stage('Build Docker Image') {
