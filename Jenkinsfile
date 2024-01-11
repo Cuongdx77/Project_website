@@ -8,7 +8,7 @@ node {
   }
   
   stage('Push Docker Image Into Docker Hub') {
-    withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_Password')]) {
+    withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_PassWord')]) {
       sh "docker login -u dxcuong206 -p ${Docker_Password}"
     }
     sh 'docker push dxcuong206/test:04'
