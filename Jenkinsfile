@@ -1,40 +1,22 @@
-pipeline {
-  environment {
-    dockerimagename = "dxcuong206/test"
-    dockerImage = ""
+node {
+  stage('Git Hub Checkout') {
+    git branch: 'main', credentialsId: 'GitHubCredential', url: 'https://github.com/Cuongdx77/Project_website.git'
   }
-  agent any
-  stages {
-    stage('Checkout Source') {
-      steps {
-        git branch: 'main', credentialsId: 'GitHubCredential', url: 'https://github.com/Cuongdx77/Project_website.git'
-      }
+  
+  stage('Build Docker Image') {
+    sh 'docker build -t dxcuong206/test:04 .'
+  }
+  
+  stage('Push Docker Image Into Docker Hub') {
+    withCredentials([string(credentialsId: 'Docker_Password', variable: 'Docker_PassWord')]) {
+      sh "docker login -u dxcuong206 -p ${Docker_Password}"
     }
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build dockerimagename
-        }
-      }
-    }
-    stage('Pushing Image') {
-      environment {
-          registryCredential = 'DockerHubCred'
-           }
-      steps{
-        script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
-          }
-        }
-      }
-    }
-    stage('Deploying container to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "deployment.yaml")
-        }
-      }
+    sh 'docker push dxcuong206/test:04'
+  }
+  
+  stage('Deploy to K8S') {
+    withKubeConfig([credentialsId: 'mykubeconfig', serverUrl: 'https://10.26.2.123:6443']) {    
+    sh 'kubectl apply -f deployment.yaml'
     }
   }
 }
