@@ -29,13 +29,13 @@ pipeline {
         }
       }
     }
-    agent{
+    stage('Deploying container to Kubernetes') {
+      agent{
         kubernetes {
             cloud 'Kubernetes'
             yamlFile 'jenkins/Pod.yaml'
-        }
-    }
-    stage('Deploying container to Kubernetes') {
+          }
+      }
       steps {
         script {
           kubernetesDeploy(configs: "deployment.yaml")
