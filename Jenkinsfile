@@ -33,7 +33,7 @@ pipeline {
       agent{
         kubernetes {
             cloud 'Kubernetes'
-            yamlFile 'jenkins/pod.yaml'
+            yamlFile 'pod.yaml'
           }
       }
       steps {
