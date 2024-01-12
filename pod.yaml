@@ -4,6 +4,4 @@ spec:
   containers:
   - name: jnlp
     image: dxcuong206/test:03
-  - command:
-    - sleep
-    - infinity
+
