@@ -37,12 +37,10 @@ pipeline {
           }
       }
       steps {
-        container('test') {
-          withCredentials(credentialsId: 'mykubeconfig', serverUrl: 'https://10.26.2.123:6443')  {    
-          sh 'kubectl apply -f deployment.yaml'
-        }
+
+        
       }
     }
   }
 }
-}
+
