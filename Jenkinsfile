@@ -3,7 +3,12 @@ pipeline {
     dockerimagename = "dxcuong206/test"
     dockerImage = ""
   }
-  agent any
+  agent{
+      kubernetes {
+          cloud 'Kubernetes'
+          yamlFile 'pod.yaml'
+      }
+    }
   stages {
     stage('Checkout Source') {
       steps {
@@ -30,15 +35,11 @@ pipeline {
       }
     }
     stage('Deploying container to Kubernetes') {
-      agent{
-        kubernetes {
-            cloud 'Kubernetes'
-            yamlFile 'pod.yaml'
-          }
-      }
       steps {
         script {
-          kubernetesDeploy(configs: "deployment.yaml")
+          withKubeConfig([credentialsId: 'mykubeconfig']) {                    
+                    sh "kubectl create -f deployment.yaml}" 
+          }
         }     
       }
     }
