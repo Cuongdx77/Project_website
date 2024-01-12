@@ -39,7 +39,7 @@ pipeline {
       steps {
         script {
           kubeconfig(credentialsId: 'mykubeconfig', serverUrl: 'https://10.26.2.123:6443') {
-              sh "kubectl create -f deployment.yaml
+              sh "kubectl create -f deployment.yaml"
           }
         }     
       }
