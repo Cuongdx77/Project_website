@@ -16,6 +16,9 @@ spec:
         app: test
     spec:
       containers:
+      - command:
+        - sleep
+        - infinity
       - name: test
         image: dxcuong206/test:04
         ports:
