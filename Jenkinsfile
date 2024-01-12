@@ -29,7 +29,7 @@ pipeline {
         }
       }
     }
-    agent {
+    agent{
         kubernetes {
             cloud 'Kubernetes'
             yamlFile 'jenkins/Pod.yaml'
