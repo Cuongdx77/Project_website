@@ -23,5 +23,4 @@ spec:
     - name: kubectl-binary
       hostPath:
         path: /usr/bin/kubectl
-  imagePullSecrets:
-  - name: registry
+
