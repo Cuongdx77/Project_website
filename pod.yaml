@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
   - name: jnlp
-    image: dxcuong206/test:03
+    image: dxcuong206/test:05
     imagePullPolicy: IfNotPresent
     env:
     - name: http_proxy
