@@ -37,7 +37,7 @@ pipeline {
         }
       }
       steps {
-            container('kubectl') {
+            container('jnlp') {
               sh 'kubectl apply -f deployment.yaml'
           }     
       }
