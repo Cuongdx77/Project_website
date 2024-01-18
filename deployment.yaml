@@ -16,11 +16,8 @@ spec:
         app: test
     spec:
       containers:
-      - command:
-        - sleep
-        - infinity
-      - name: test
-        image: dxcuong206/test:04
+      - name: test-container  # Tên của container
+        image: dxcuong206/test:04  # Hình ảnh container
         ports:
         - containerPort: 80
 ---
