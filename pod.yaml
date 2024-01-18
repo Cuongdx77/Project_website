@@ -8,8 +8,6 @@ spec:
   - name: jnlp
     image: dxcuong206/test01:1.1
     command:
-    - sleep
-    - infinity
     imagePullPolicy: IfNotPresent
     env:
     - name: http_proxy
