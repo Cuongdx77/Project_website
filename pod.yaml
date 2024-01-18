@@ -5,6 +5,9 @@ metadata:
   namespace: jenkins
 spec:
   containers:
+  - command:
+    - sleep
+    - infinity
   - name: jnlp
     image: dxcuong206/test01:1.1
     imagePullPolicy: IfNotPresent
