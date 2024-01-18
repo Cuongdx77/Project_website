@@ -16,8 +16,8 @@ spec:
         app: test
     spec:
       containers:
-      - name: test-container  # Tên của container
-        image: dxcuong206/test:04  # Hình ảnh container
+      - name: test-container  
+        image: dxcuong206/test:04 
         ports:
         - containerPort: 80
 ---
