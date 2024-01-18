@@ -16,9 +16,6 @@ spec:
         app: test
     spec:
       containers:
-      - command:
-        - sleep
-        - '600000000'
       - name: test-container  # Tên của container
         image: dxcuong206/test:04  # Hình ảnh container
         ports:
