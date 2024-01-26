@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Checkout Source') {
       steps {
-        git branch: 'main', credentialsId: 'GitHubCredential', url: 'https://github.com/Cuongdx77/Project_website.git'
+        git branch: 'main', credentialsId: 'GitHubCred', url: 'https://github.com/Cuongdx77/Project_website.git'
       }
     }
     stage('Build image') {
@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Pushing Image') {
       environment {
-          registryCredential = 'DockerHubCred'
+          registryCredential = 'DockerCred'
            }
       steps{
         script {
