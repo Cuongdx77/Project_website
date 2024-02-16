@@ -9,13 +9,6 @@ spec:
     image: dxcuong206/test01:1.3
     command:
     imagePullPolicy: IfNotPresent
-    env:
-    - name: http_proxy
-      value: "http://10.26.2.55:8080"
-    - name: https_proxy
-      value: "http://10.26.2.55:8080"
-    - name: no_proxy
-      value: "localhost,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,169.254.0.0/16,127.0.0.0/8"
     volumeMounts:
     - name: kubectl-binary
       mountPath: /usr/local/bin/kubectl
