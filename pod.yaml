@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
   - name: jnlp
-    image: dxcuong206/test01:1.3
+    image: dxcuong206/test:01
     command:
     imagePullPolicy: IfNotPresent
     volumeMounts:
